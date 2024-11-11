@@ -24,14 +24,14 @@ class DatabaseSeeder extends Seeder
         //     'name' => 'Test User',
         //     'email' => 'test@example.com',
         // ]);
-        // $this->call(CategorieSeeder::class);
+        $this->call(CategorieSeeder::class);
 
         // Seed transactions, debts, receivables, and financial reports
-        // Transaction::factory(20)->create([
-        //     'idkategori' => categorie::inRandomOrder()->first()->id
-        // ]);
-        // debt::factory(10)->create();
-        // receinvable::factory(10)->create();
+        Transaction::factory(20)->create([
+            'idkategori' => categorie::inRandomOrder()->first()->id
+        ]);
+        debt::factory(10)->create();
+        receinvable::factory(10)->create();
         Financial_Report::factory(12)->create();
     }
 }
