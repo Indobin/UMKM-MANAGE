@@ -16,6 +16,7 @@ class DebtFactory extends Factory
     public function definition()
     {
         return [
+            'nama' => $this->faker->randomElement(['Pembayaran Tahu', 'Pembayaran Parkir', 'Pengiriman Tahu', 'Ganti Tahu']) . ' ' . $this->faker->word,
             'jumlah' => $this->faker->randomFloat(2, 1000, 5000),
             'tanggal_jatuh_tempo' => $this->faker->date(),
             'status' => $this->faker->randomElement(['Belum Lunas', 'Lunas']),

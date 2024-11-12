@@ -16,6 +16,8 @@ class TransactionFactory extends Factory
     public function definition()
     {
         return [
+            'nama' => $this->faker->randomElement(['Pembayaran Tahu', 'Pembayaran Parkir', 'Pengiriman Tahu', 'Ganti Tahu']) . ' ' . $this->faker->word,
+            'foto' => 'https://source.unsplash.com/random/640x480',
             'tanggal' => $this->faker->date(),
             'jumlah' => $this->faker->randomFloat(2, 100, 1000),
             'jenis' => $this->faker->randomElement(['pemasukan', 'pengeluaran']),

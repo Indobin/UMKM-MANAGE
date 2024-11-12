@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('transactions', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
+            $table->string('foto')->nullable();
             $table->date('tanggal');
             $table->decimal('jumlah',15, 2);
             $table->enum('jenis',['pemasukan', 'pengeluaran']);

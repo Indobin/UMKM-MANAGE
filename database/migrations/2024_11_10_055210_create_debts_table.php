@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('debts', function (Blueprint $table) {
             $table->id();
+            $table->string('nama');
             $table->decimal('jumlah',15, 2);
             $table->date('tanggal_jatuh_tempo');
             $table->enum('status',['Belum Lunas', 'Lunas']);

@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Models;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
@@ -16,8 +16,8 @@ class Transaction extends Model
      * Relasi ke model Category
      * Satu transaksi memiliki satu kategori
      */
-    public function category()
+    public function category(): BelongsTo
     {
-        return $this->belongsTo(Categorie::class);
+        return $this->belongsTo(Categorie::class, 'idkategori');
     }
 }
