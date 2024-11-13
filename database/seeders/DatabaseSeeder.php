@@ -27,11 +27,11 @@ class DatabaseSeeder extends Seeder
         $this->call(CategorieSeeder::class);
 
         // Seed transactions, debts, receivables, and financial reports
-        Transaction::factory(5)->create([
+        Transaction::factory(2)->create([
             'idkategori' => categorie::inRandomOrder()->first()->id
         ]);
-        debt::factory(5)->create();
-        receinvable::factory(5)->create();
-        Financial_Report::factory(5)->create();
+        debt::factory(2)->create();
+        receinvable::factory(2)->create();
+        Financial_Report::factory(2)->create();
     }
 }

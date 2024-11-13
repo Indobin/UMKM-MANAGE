@@ -17,9 +17,9 @@ return new class extends Migration
             $table->string('foto')->nullable();
             $table->date('tanggal');
             $table->decimal('jumlah',15, 2);
-            $table->enum('jenis',['pemasukan', 'pengeluaran']);
+            $table->boolean('pemasukan')->default(true);
             $table->foreignId('idkategori')->constrained('categories')->onDelete('cascade');
-            $table->text('deskripsi');
+            $table->string('catatan');
             $table->timestamps();
         });
     }

@@ -16,8 +16,8 @@ return new class extends Migration
             $table->string('nama');
             $table->decimal('jumlah',15, 2);
             $table->date('tanggal_jatuh_tempo');
-            $table->enum('status',['Belum Lunas', 'Lunas']);
-            $table->text('deskripsi');
+            $table->boolean('lunas')->default(false);
+            $table->string('catatan');
             $table->timestamps();
         });
     }

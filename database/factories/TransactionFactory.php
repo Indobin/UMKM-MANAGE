@@ -20,8 +20,8 @@ class TransactionFactory extends Factory
             'foto' => 'https://source.unsplash.com/random/640x480',
             'tanggal' => $this->faker->date(),
             'jumlah' => $this->faker->randomFloat(2, 100, 1000),
-            'jenis' => $this->faker->randomElement(['pemasukan', 'pengeluaran']),
-            'deskripsi' => $this->faker->sentence(),
+            'pemasukan' => false,
+            'catatan' => $this->faker->sentence(),
         ];
     }
 }

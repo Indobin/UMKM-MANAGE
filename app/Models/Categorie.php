@@ -9,6 +9,7 @@ class categorie extends Model
 
     protected $fillable = [
         'kategori',
+        'foto',
     ]; 
 
     /**

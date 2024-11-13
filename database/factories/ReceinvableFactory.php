@@ -18,8 +18,8 @@ class ReceinvableFactory extends Factory
             'nama' => $this->faker->randomElement(['Pembayaran Tahu', 'Pembayaran Parkir', 'Pengiriman Tahu', 'Ganti Tahu']) . ' ' . $this->faker->word,
             'jumlah' => $this->faker->randomFloat(2, 1000, 5000),
             'tanggal_jatuh_tempo' => $this->faker->date(),
-            'status' => $this->faker->randomElement(['Belum Terkumpul', 'Terkumpul']),
-            'deskripsi' => $this->faker->sentence(),
+            'terbayarkan' => false,
+            'catatan' => $this->faker->sentence(),
         ];
     }
 }
