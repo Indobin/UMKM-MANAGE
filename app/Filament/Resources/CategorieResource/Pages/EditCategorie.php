@@ -9,11 +9,12 @@ use Filament\Resources\Pages\EditRecord;
 class EditCategorie extends EditRecord
 {
     protected static string $resource = CategorieResource::class;
+    protected static ?string $title = 'Edit Kategori';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()->label('Hapus'),
         ];
     }
 }
