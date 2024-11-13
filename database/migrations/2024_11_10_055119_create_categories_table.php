@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('kategori')->unique();
+            $table->string('foto')->nullable();
             $table->timestamps();
         });
     }

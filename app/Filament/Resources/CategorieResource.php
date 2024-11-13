@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class CategorieResource extends Resource
 {
     protected static ?string $model = Categorie::class;
-    protected static ?string $pluralLabel = 'Kategori';
+
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -25,8 +25,10 @@ class CategorieResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('kategori')
                     ->required()
-                    ->maxLength(40)
-                    ->minLength(5),
+                    ->maxLength(255),
+                Forms\Components\FileUpload::make('foto')
+                    ->image()
+                    ->required(),
             ]);
     }
 
@@ -35,6 +37,8 @@ class CategorieResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('kategori')
+                    ->searchable(),
+                Tables\Columns\ImageColumn::make('foto')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
