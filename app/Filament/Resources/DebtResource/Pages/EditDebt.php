@@ -9,11 +9,12 @@ use Filament\Resources\Pages\EditRecord;
 class EditDebt extends EditRecord
 {
     protected static string $resource = DebtResource::class;
+    protected static ?string $title = 'Edit Hutang';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()->label('Hapus'),
         ];
     }
 }

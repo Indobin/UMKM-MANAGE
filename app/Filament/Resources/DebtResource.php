@@ -18,7 +18,7 @@ class DebtResource extends Resource
 {
     protected static ?string $model = Debt::class;
     protected static ?string $pluralLabel = 'Hutang';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
 
     public static function form(Form $form): Form
     {
@@ -47,9 +47,11 @@ class DebtResource extends Resource
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('jumlah')
+                    ->label('Total')
                     ->numeric()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tanggal_jatuh_tempo')
+                    ->label('Tgl Jatuh Tempo')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('catatan')

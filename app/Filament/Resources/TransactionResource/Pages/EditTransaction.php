@@ -9,11 +9,12 @@ use Filament\Resources\Pages\EditRecord;
 class EditTransaction extends EditRecord
 {
     protected static string $resource = TransactionResource::class;
+    protected static ?string $title = 'Edit Transaksi';
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\DeleteAction::make()->label('Hapus'),
         ];
     }
 }

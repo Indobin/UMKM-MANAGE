@@ -12,12 +12,13 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use PhpParser\Node\Stmt\Label;
 
 class TransactionResource extends Resource
 {
     protected static ?string $model = Transaction::class;
     protected static ?string $pluralLabel = 'Transaksi';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
 
     public static function form(Form $form): Form
     {
@@ -31,21 +32,21 @@ class TransactionResource extends Resource
                 Forms\Components\DatePicker::make('tanggal')
                     ->required(),
                 Forms\Components\TextInput::make('jumlah')
-                    ->label('Total Nominal')
+                    ->label('Total')
                     ->required()
                     ->numeric(),
-                Forms\Components\Select::make('jenis')
+                Forms\Components\Select::make('pemasukan')
                     ->label('Jenis Transaksi')
                     ->required()
                     ->options([
-                        'pemasukan' => 'Pemasukan',
-                        'pengeluaran' => 'Pengeluaran',
+                        true => 'Pemasukan',
+                        false => 'Pengeluaran',
                     ]),
                 Forms\Components\Select::make('idkategori')
                     ->label('Kategori')
                     ->relationship('category', 'kategori')
                     ->required(),
-                Forms\Components\Textarea::make('deskripsi')
+                Forms\Components\Textarea::make('catatan')
                     ->required()
                     ->columnSpanFull(),
             ]);
@@ -55,19 +56,25 @@ class TransactionResource extends Resource
     {
         return $table
             ->columns([
-                Tables\Columns\TextColumn::make('nama')
+                Tables\Columns\ImageColumn::make('category.foto')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('foto')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('category.kategori')
+                    ->description(fn (Transaction $transaction): string => $transaction->nama)
+                    ->label('Transaksi'),
+                Tables\Columns\IconColumn::make('pemasukan')
+                    ->label('Tipe')
+                    ->trueIcon('heroicon-o-arrow-up-circle')
+                    ->falseIcon('heroicon-o-arrow-down-circle')
+                    ->trueColor('success')
+                    ->falseColor('danger')
+                    ->boolean(),
                 Tables\Columns\TextColumn::make('tanggal')
                     ->date()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah')
+                    ->label('Total')
                     ->numeric()
-                    ->sortable(),
-                Tables\Columns\TextColumn::make('jenis'),
-                Tables\Columns\TextColumn::make('category.kategori')
-                    ->numeric()
+                    ->money('IDR', locale:'id')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
