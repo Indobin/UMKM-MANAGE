@@ -69,7 +69,7 @@ class TransactionResource extends Resource
                     ->falseColor('danger')
                     ->boolean(),
                 Tables\Columns\TextColumn::make('tanggal')
-                    ->date()
+                    ->date('Y-m-d')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('jumlah')
                     ->label('Total')

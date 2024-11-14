@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\DebtResource\Pages;
-use App\Filament\Resources\DebtResource\RelationManagers;
-use App\Models\Debt;
+use App\Filament\Resources\ReceinvableResource\Pages;
+use App\Filament\Resources\ReceinvableResource\RelationManagers;
+use App\Models\Receinvable;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -12,13 +12,12 @@ use Filament\Tables;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
-use PhpParser\Node\Stmt\Label;
 
-class DebtResource extends Resource
+class ReceinvableResource extends Resource
 {
-    protected static ?string $model = Debt::class;
-    protected static ?string $pluralLabel = 'Hutang';
-    protected static ?string $navigationIcon = 'heroicon-o-credit-card';
+    protected static ?string $model = Receinvable::class;
+    protected static ?string $pluralLabel = 'Piutang';
+    protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
 
     public static function form(Form $form): Form
     {
@@ -32,11 +31,11 @@ class DebtResource extends Resource
                     ->numeric(),
                 Forms\Components\DatePicker::make('tanggal_jatuh_tempo')
                     ->required(),
+                Forms\Components\Toggle::make('terbayarkan')
+                    ->required(),
                 Forms\Components\TextInput::make('catatan')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\Toggle::make('lunas')
-                ->required(),
             ]);
     }
 
@@ -46,7 +45,7 @@ class DebtResource extends Resource
             ->columns([
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\IconColumn::make('lunas')
+                Tables\Columns\IconColumn::make('terbayarkan')
                 ->boolean(),
                 Tables\Columns\TextColumn::make('jumlah')
                     ->label('Total')
@@ -54,7 +53,7 @@ class DebtResource extends Resource
                     ->money('IDR', locale:'id')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tanggal_jatuh_tempo')
-                    ->label('Tgl. Jatuh Tempo')
+                    ->label('Tgl. Jatuh Tempo')     
                     ->date('Y-m-d')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('catatan')
@@ -72,7 +71,7 @@ class DebtResource extends Resource
                 //
             ])
             ->actions([
-                Tables\Actions\EditAction::make()->label('Ubah'),
+                Tables\Actions\EditAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -87,18 +86,13 @@ class DebtResource extends Resource
             //
         ];
     }
-    public static function getHeaderActions(): array
-    {
-        return [
-            Tables\Actions\CreateAction::make()->label('Tambah Data'),
-        ];
-    }
+
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListDebts::route('/'),
-            'create' => Pages\CreateDebt::route('/create'),
-            'edit' => Pages\EditDebt::route('/{record}/edit'),
+            'index' => Pages\ListReceinvables::route('/'),
+            'create' => Pages\CreateReceinvable::route('/create'),
+            'edit' => Pages\EditReceinvable::route('/{record}/edit'),
         ];
     }
 }
