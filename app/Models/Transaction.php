@@ -20,4 +20,8 @@ class Transaction extends Model
     {
         return $this->belongsTo(Categorie::class, 'idkategori');
     }
+    public function scopePemasukan($query)
+    {
+        return $query->where('pemasukan', true);
+    }
 }
