@@ -25,7 +25,9 @@ class CategorieResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('kategori')
                     ->required()
-                    ->maxLength(255),
+                    ->maxLength(50)
+                    ->minLength(10)
+                    ->unique(ignoreRecord:true),
                 Forms\Components\FileUpload::make('foto')
                     ->image()
                     ->required(),

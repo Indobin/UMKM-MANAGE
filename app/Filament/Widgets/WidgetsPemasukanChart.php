@@ -23,7 +23,7 @@ class WidgetsPemasukanChart extends ChartWidget
         : now(); 
         
 
-    $filteredQuery = Transaction::where('pemasukan', false);
+    $filteredQuery = Transaction::where('pemasukan', true);
 
     $data = Trend::query($filteredQuery)
         ->between(
