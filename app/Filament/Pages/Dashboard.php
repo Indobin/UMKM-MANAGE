@@ -12,9 +12,10 @@ use Filament\Pages\Dashboard as BaseDashboard;
 class Dashboard extends BaseDashboard
 {
     use BaseDashboard\Concerns\HasFiltersForm;
-
+    protected static ?string $title = 'Dashboard';
     public function filtersForm(Form $form): Form
     {
+        
         return $form
             ->schema([
                 Section::make()
@@ -25,7 +26,7 @@ class Dashboard extends BaseDashboard
                             ->minDate(fn (Get $get) => $get('startDate') ?: now())
                             ->maxDate(now()),
                     ])
-                    ->columns(3),
+                    ->columns(2),
             ]);
     }
 }

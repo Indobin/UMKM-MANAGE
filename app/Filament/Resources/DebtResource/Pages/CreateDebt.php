@@ -10,4 +10,8 @@ class CreateDebt extends CreateRecord
 {
     protected static string $resource = DebtResource::class;
     protected static ?string $title = 'Tambah Hutang';
+    public function afterSave()
+    {
+        $this->redirect(static::getResource()::getUrl('index'));
+    }
 }

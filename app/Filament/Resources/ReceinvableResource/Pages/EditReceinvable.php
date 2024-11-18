@@ -17,4 +17,8 @@ class EditReceinvable extends EditRecord
             Actions\DeleteAction::make()->label('Hapus'),
         ];
     }
+    public function afterSave()
+    {
+        $this->redirect(static::getResource()::getUrl('index'));
+    }
 }

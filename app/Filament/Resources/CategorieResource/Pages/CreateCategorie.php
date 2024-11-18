@@ -10,4 +10,8 @@ class CreateCategorie extends CreateRecord
 {
     protected static string $resource = CategorieResource::class;
     protected static ?string $title = 'Tambah Kategori';
+    public function afterSave()
+    {
+        $this->redirect(static::getResource()::getUrl('index'));
+    }
 }

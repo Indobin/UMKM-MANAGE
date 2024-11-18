@@ -14,15 +14,18 @@ class WidgetsPemasukanChart extends ChartWidget
     protected static string $color = 'success';
     protected function getData(): array
     {
-        $startDate = ! is_null($this->filters['startDate'] ?? null) ?
-        Carbon::parse($this->filters['startDate']) :
-        null;
-        $endDate = ! is_null($this->filters['endDate'] ?? null) ?
-            Carbon::parse($this->filters['endDate']) :
-            now();
+        $startDate = !empty($this->filters['startDate'])
+        ? Carbon::parse($this->filters['startDate'])
+        : now()->startOfYear(); 
 
-        $filteredQuery = Transaction::where('pemasukan', true);
-        $data = Trend::query($filteredQuery)
+    $endDate = !empty($this->filters['endDate'])
+        ? Carbon::parse($this->filters['endDate'])
+        : now(); 
+        
+
+    $filteredQuery = Transaction::where('pemasukan', false);
+
+    $data = Trend::query($filteredQuery)
         ->between(
             start: $startDate,
             end: $endDate,
