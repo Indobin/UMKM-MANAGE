@@ -11,4 +11,8 @@ class CreateReceinvable extends CreateRecord
     protected static string $resource = ReceinvableResource::class;
     
     protected static ?string $title = 'Tambah Piutang';
+    public function afterSave()
+    {
+        $this->redirect(static::getResource()::getUrl('index'));
+    }
 }

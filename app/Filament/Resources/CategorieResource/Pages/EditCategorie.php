@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources\CategorieResource\Pages;
 
-use App\Filament\Resources\CategorieResource;
 use Filament\Actions;
+use Filament\Notifications\Notification;
 use Filament\Resources\Pages\EditRecord;
+use App\Filament\Resources\CategorieResource;
 
 class EditCategorie extends EditRecord
 {
@@ -16,5 +17,9 @@ class EditCategorie extends EditRecord
         return [
             Actions\DeleteAction::make()->label('Hapus'),
         ];
+    }
+    public function afterSave()
+    {
+        $this->redirect(static::getResource()::getUrl('index'));
     }
 }
