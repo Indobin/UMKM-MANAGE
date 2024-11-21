@@ -18,6 +18,7 @@ class ReceinvableResource extends Resource
     protected static ?string $model = Receinvable::class;
     protected static ?string $pluralLabel = 'Piutang';
     protected static ?string $navigationIcon = 'heroicon-o-circle-stack';
+    protected static ?string $navigationGroup = 'Hutang-Piutang';
 
     public static function form(Form $form): Form
     {

@@ -2,9 +2,9 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategorieResource\Pages;
-use App\Filament\Resources\CategorieResource\RelationManagers;
-use App\Models\Categorie;
+use App\Filament\Resources\ProductResource\Pages;
+use App\Filament\Resources\ProductResource\RelationManagers;
+use App\Models\Product;
 use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
@@ -13,25 +13,32 @@ use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
-class CategorieResource extends Resource
+class ProductResource extends Resource
 {
-    protected static ?string $model = Categorie::class;
-    protected static ?string $pluralLabel = 'Kategori';
-    protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
-    protected static ?string $navigationGroup = 'Data Transaksi';
+    protected static ?string $model = Product::class;
+
+    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
     {
         return $form
             ->schema([
-                Forms\Components\TextInput::make('kategori')
+                Forms\Components\TextInput::make('kode')
                     ->required()
-                    ->maxLength(50)
-                    ->minLength(10)
-                    ->unique(ignoreRecord:true),
-                Forms\Components\FileUpload::make('foto')
-                    ->image()
-                    ->required(),
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('nama')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('kategori')
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('stok')
+                    ->label('stok awal')
+                    ->disabledOn('edit')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\TextInput::make('harga')
+                    ->required()
+                    ->maxLength(255),
             ]);
     }
 
@@ -39,9 +46,15 @@ class CategorieResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('kode')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('nama')
+                    ->searchable(),
                 Tables\Columns\TextColumn::make('kategori')
                     ->searchable(),
-                Tables\Columns\ImageColumn::make('foto')
+                Tables\Columns\TextColumn::make('stok')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('harga')
                     ->searchable(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
@@ -75,9 +88,9 @@ class CategorieResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategorie::route('/create'),
-            'edit' => Pages\EditCategorie::route('/{record}/edit'),
+            'index' => Pages\ListProducts::route('/'),
+            'create' => Pages\CreateProduct::route('/create'),
+            'edit' => Pages\EditProduct::route('/{record}/edit'),
         ];
     }
 }

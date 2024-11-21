@@ -19,6 +19,7 @@ class DebtResource extends Resource
     protected static ?string $model = Debt::class;
     protected static ?string $pluralLabel = 'Hutang';
     protected static ?string $navigationIcon = 'heroicon-o-credit-card';
+    protected static ?string $navigationGroup = 'Hutang-Piutang';
 
     public static function form(Form $form): Form
     {
