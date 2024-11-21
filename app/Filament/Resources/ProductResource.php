@@ -16,7 +16,7 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
-
+    protected static ?string $pluralLabel = 'Produk';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
     public static function form(Form $form): Form
@@ -29,16 +29,19 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('kategori')
-                    ->maxLength(255),
+                // Forms\Components\TextInput::make('kategori')
+                //     ->maxLength(255),
                 Forms\Components\TextInput::make('stok')
-                    ->label('stok awal')
+                    ->required()
                     ->disabledOn('edit')
-                    ->required()
                     ->maxLength(255),
-                Forms\Components\TextInput::make('harga')
-                    ->required()
-                    ->maxLength(255),
+                Forms\Components\Select::make('satuan')
+                    ->options([
+                        'pcs' => 'Pcs',
+                        'kg' => 'Kg',
+                        'lusin' => 'Lusin'
+                    ])
+                    ->required(),
             ]);
     }
 
@@ -50,12 +53,11 @@ class ProductResource extends Resource
                     ->searchable(),
                 Tables\Columns\TextColumn::make('nama')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('kategori')
-                    ->searchable(),
+                // Tables\Columns\TextColumn::make('kategori')
+                //     ->searchable(),
                 Tables\Columns\TextColumn::make('stok')
                     ->searchable(),
-                Tables\Columns\TextColumn::make('harga')
-                    ->searchable(),
+                Tables\Columns\TextColumn::make('satuan'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
