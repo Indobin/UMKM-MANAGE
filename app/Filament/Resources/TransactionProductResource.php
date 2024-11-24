@@ -23,7 +23,11 @@ class TransactionProductResource extends Resource
     {
         return $form
             ->schema([
-                //
+                Forms\Components\TextInput::make('nama_pembeli')
+                    ->required()
+                    ->maxLength(255),
+                Forms\Components\DatePicker::make('tanggal_transaksi')
+                    ->required(),
             ]);
     }
 

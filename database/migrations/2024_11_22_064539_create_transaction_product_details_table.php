@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('transaction_product_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('transaction_id')->constrained('transaction_products');
             $table->foreignId('product_id')->constrained('products');
             $table->integer('jumlah');
             $table->decimal('harga', 15, 2);
