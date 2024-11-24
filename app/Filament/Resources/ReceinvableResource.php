@@ -30,7 +30,7 @@ class ReceinvableResource extends Resource
                 Forms\Components\TextInput::make('jumlah')
                     ->required()
                     ->numeric(),
-                Forms\Components\DatePicker::make('tanggal_jatuh_tempo')
+                Forms\Components\DatePicker::make('tanggal_transasksi')
                     ->required(),
                 Forms\Components\Toggle::make('terbayarkan')
                     ->required(),

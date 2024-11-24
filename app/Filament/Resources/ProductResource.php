@@ -34,7 +34,10 @@ class ProductResource extends Resource
                 Forms\Components\TextInput::make('stok')
                     ->required()
                     ->disabledOn('edit')
-                    ->maxLength(255),
+                    ->numeric(),
+                Forms\Components\TextInput::make('harga')
+                    ->required()
+                    ->numeric(),
                 Forms\Components\Select::make('satuan')
                     ->options([
                         'pcs' => 'Pcs',
