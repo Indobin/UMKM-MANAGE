@@ -10,6 +10,7 @@ use Filament\Forms\Form;
 use Filament\Tables\Table;
 use Filament\Resources\Resource;
 use App\Models\TransactionProduct;
+use Filament\Forms\Components\Grid;
 use App\Models\TransactionProductDetail;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Validation\ValidationException;
@@ -38,8 +39,11 @@ class TransactionProductDetailResource extends Resource
                     ->disabled(),
                 Forms\Components\DatePicker::make('tanggal_transaksi')
                     ->required()
-                    ->default($transaction->tanggal_transaksi ?? null),
-                Forms\Components\Select::make('product_id')
+                    ->default($transaction->tanggal_transaksi ?? null)
+                    ->disabled(),
+                Grid::make()
+                ->schema([
+                    Forms\Components\Select::make('product_id')
                     ->label('Produk')
                     ->relationship('product', 'nama')
                     ->required()
@@ -48,26 +52,21 @@ class TransactionProductDetailResource extends Resource
                         $produk = Product::find($state);
                         $set('harga', $produk->harga ?? null);
                     }),
-                Forms\Components\TextInput::make('jumlah')
-                    ->required()
-                    ->numeric()
-                    ->label('Jumlah'),
-                    // ->afterStateUpdated(function ($state, callable $get, callable $set) {
-                    //     $productId = $get('product_id');
-                    //     $product = Product::find($productId);
-                
-                    //     if ($product && $state > $product->stok) {
-                    //         $set('jumlah', $product->stok); // Set jumlah ke stok maksimum
-                    //         $this->notify('danger', 'Jumlah tidak boleh melebihi stok yang tersedia!');
-                    // }}),
-                Forms\Components\TextInput::make('harga')
+                    Forms\Components\TextInput::make('harga')
                     ->label('Harga Produk'),
-                   
+                    // ->disabled(),
+                    Forms\Components\TextInput::make('jumlah')
+                        ->required()
+                        ->numeric()
+                        ->label('Jumlah'),
+
+                ])->columns(3),
+
                 Forms\Components\Hidden::make('transaction_id')
                     ->label('Harga Produk')
                     ->default(request('transaction_id')),
-                
-                
+
+
             ]);
     }
 
