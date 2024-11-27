@@ -18,7 +18,7 @@ class CategorieResource extends Resource
     protected static ?string $model = Categorie::class;
     protected static ?string $pluralLabel = 'Kategori';
     protected static ?string $navigationIcon = 'heroicon-o-clipboard-document-list';
-    protected static ?string $navigationGroup = 'Data Transaksi';
+    protected static ?string $navigationGroup = 'Transaksi';
 
     public static function form(Form $form): Form
     {

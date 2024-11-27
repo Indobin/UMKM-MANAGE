@@ -16,9 +16,9 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 class TransactionProductResource extends Resource
 {
     protected static ?string $model = TransactionProduct::class;
-
+    protected static ?string $pluralLabel = 'Transaksi Produk';
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
-
+    protected static ?string $navigationGroup = 'Transaksi Produk';
     public static function form(Form $form): Form
     {
         return $form
@@ -35,14 +35,14 @@ class TransactionProductResource extends Resource
     {
         return $table
             ->columns([
-                //
+                
             ])
             ->filters([
                 //
             ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-            ])
+            // ->actions([
+            //     Tables\Actions\EditAction::make(),
+            // ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
