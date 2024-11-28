@@ -14,7 +14,7 @@ class TransactionProductDetail extends Model
     protected static function booted()
     {
         static::saved(function ($detail) {
-            $product = $detail->product; 
+            $product = $detail->product;
             if ($product) {
                 $product->decrement('stok', $detail->jumlah);
             }
@@ -23,5 +23,9 @@ class TransactionProductDetail extends Model
     public function product(): BelongsTo
     {
         return $this->belongsTo(Product::class, 'product_id');
+    }
+    public function transactionProduct()
+    {
+        return $this->belongsTo(TransactionProduct::class, 'transaction_id');
     }
 }

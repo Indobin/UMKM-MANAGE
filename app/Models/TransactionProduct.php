@@ -10,4 +10,8 @@ class TransactionProduct extends Model
         'id',
         'timestamps',
     ];
+    public function details()
+    {
+        return $this->hasMany(TransactionProductDetail::class, 'transaction_id');
+    }
 }

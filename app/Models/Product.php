@@ -11,9 +11,9 @@ class Product extends Model
         'id',
         'timestamps',
     ];
-    
-    public function transaction_detail(): HasMany
+
+    public function transactionDetails()
     {
-        return $this->hasMany(TransactionProductDetail::class);
+        return $this->hasMany(TransactionProductDetail::class, 'product_id');
     }
 }

@@ -26,13 +26,14 @@ class DashboardPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        
+
         return $panel
             ->default()
             ->id('dashboard')
             ->path('admin')
             ->login(Login::class)
             ->brandName('UMKM')
+            ->registration()
             // ->footer('© 2024 UMKM Solutions') // Teks footer di bagian bawah
             ->colors([
                 'primary' => Color::Amber,
@@ -44,7 +45,7 @@ class DashboardPanelProvider extends PanelProvider
                 Widgets\AccountWidget::class,
                 // Widgets\FilamentInfoWidget::class,
             ])
-           
+
             ->middleware([
                 EncryptCookies::class,
                 AddQueuedCookiesToResponse::class,

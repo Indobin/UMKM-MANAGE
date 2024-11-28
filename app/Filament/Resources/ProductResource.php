@@ -17,7 +17,7 @@ class ProductResource extends Resource
 {
     protected static ?string $model = Product::class;
     protected static ?string $pluralLabel = 'Produk';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-cube';
     protected static ?string $navigationGroup = 'Transaksi Produk';
 
     public static function form(Form $form): Form
@@ -26,7 +26,13 @@ class ProductResource extends Resource
             ->schema([
                 Forms\Components\TextInput::make('kode')
                     ->required()
-                    ->maxLength(255),
+                    ->disabled()
+                    ->dehydrated(true)
+                    ->default(function (){
+                        $lastCode = Product::max('kode');
+                        return $lastCode ? $lastCode + 1 : 1001;
+                    }),
+                    // ->disabled(),
                 Forms\Components\TextInput::make('nama')
                     ->required()
                     ->maxLength(255),

@@ -22,20 +22,20 @@ class TransactionProductDetailResource extends Resource
 {
     protected static ?string $model = TransactionProductDetail::class;
     protected static ?string $pluralLabel = 'Transaksi Produk';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationGroup = 'Transaksi Produk';
     public static function canViewAny(): bool
     {
         // Cek jika route yang sedang diakses adalah "create"
         $currentRouteName = request()->route()?->getName();
-    
+
         if ($currentRouteName === 'filament.dashboard.resources.transaction-product-details.create') {
             return true; // Izinkan akses ke halaman create
         }
-    
+
         return false; // Sembunyikan dari sidebar dan halaman lain
     }
-    
+
 
     public static function isGloballySearchable(): bool
     {
@@ -92,7 +92,7 @@ class TransactionProductDetailResource extends Resource
     {
         return $table
             ->columns([
-                //
+               
             ])
             ->filters([
                 //

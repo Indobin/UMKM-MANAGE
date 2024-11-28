@@ -17,7 +17,7 @@ class TransactionProductResource extends Resource
 {
     protected static ?string $model = TransactionProduct::class;
     protected static ?string $pluralLabel = 'Transaksi Produk';
-    protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
+    protected static ?string $navigationIcon = 'heroicon-o-banknotes';
     protected static ?string $navigationGroup = 'Transaksi Produk';
     public static function form(Form $form): Form
     {
@@ -35,14 +35,26 @@ class TransactionProductResource extends Resource
     {
         return $table
             ->columns([
-                
+                Tables\Columns\TextColumn::make('nama_pembeli')
+                    ->label('Nama Pembeli')
+                    ->searchable(),
+                Tables\Columns\TextColumn::make('tanggal_transaksi')
+                    ->label('Tanggal Transaksi')
+                    ->date('d F Y')
+                    ->sortable(),
+                // Tables\Actions\Action::make('print_invoice')
+
             ])
             ->filters([
                 //
             ])
-            // ->actions([
-            //     Tables\Actions\EditAction::make(),
-            // ])
+            ->actions([
+                Tables\Actions\Action::make('print_invoice')
+                    ->label('Print Invoice')
+                    ->icon('heroicon-o-printer')
+                    ->url(fn (TransactionProduct $record) => route('invoice.print', $record))
+                    ->openUrlInNewTab(),
+            ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),

@@ -54,8 +54,8 @@ class ReceinvableResource extends Resource
                     ->money('IDR', locale:'id')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tanggal_jatuh_tempo')
-                    ->label('Tgl. Jatuh Tempo')     
-                    ->date('Y-m-d')
+                    ->label('Tgl. Jatuh Tempo')
+                    ->date('d F Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('catatan')
                     ->searchable(),

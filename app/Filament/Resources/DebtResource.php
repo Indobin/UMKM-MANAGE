@@ -56,7 +56,7 @@ class DebtResource extends Resource
                     ->sortable(),
                 Tables\Columns\TextColumn::make('tanggal_jatuh_tempo')
                     ->label('Tgl. Jatuh Tempo')
-                    ->date('Y-m-d')
+                    ->date('d F Y')
                     ->sortable(),
                 Tables\Columns\TextColumn::make('catatan')
                     ->searchable(),
